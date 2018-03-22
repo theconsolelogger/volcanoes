@@ -13,7 +13,6 @@
 
 // What we will do
 - We will optimise the placement of taxis across the city
-- We need to find out which area has a great inflow or outflow of cars
 - We use a model in this paper and apply it to our situation
 
 // What we have done
