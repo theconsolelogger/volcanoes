@@ -1,32 +1,30 @@
+"use strict";
+
 var overlays = [
     { 'type': 0, 'coordinates': [
             {'lat': -74.023247, 'lng': 40.766421},
-            {'lat': -73.693245, 'lng': 40.766421},
-        ],
+            {'lat': -73.693245, 'lng': 40.766421}
+        ]
     },
     { 'type': 1, 'coordinates': [
             {'lat': -74.023247, 'lng': 40.605361},
-            {'lat': -73.693245, 'lng': 440.605361},
-        ],
-    },
+            {'lat': -73.693245, 'lng': 440.605361}
+        ]
+    }
 ];
-
-var map = createMap();
-
-cycleOverlay(map, overlays);
 
 // Cycles through overlayes
 function cycleOverlay(map, mapOverlays)
 {
     // Create the first overlay and add to map
-    overlayCount = 1;
-    overlay = '';
+    var overlayCount = 1;
+    var overlay = '';
 
     // Changes overlay every 3 seconds
     setInterval(function() {
         map.removeOverlay(overlay);
 
-        points = [];
+        var points = [];
 
         for (var point in mapOverlays[overlayCount - 1].coordinates)
         {
@@ -70,7 +68,7 @@ function createOverlay(coordinates)
 {
     // Options for the overlay
     // TODO: Set colour for overlay
-    overlayOptions = {
+    var overlayOptions = {
       opacity: 0.7,
       displayOnMinLevel: 10,
       displayOnMaxLevel: 14,
@@ -80,3 +78,7 @@ function createOverlay(coordinates)
 
     return overlay;
 }
+
+var map = createMap();
+
+cycleOverlay(map, overlays);
