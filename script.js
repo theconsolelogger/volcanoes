@@ -1,44 +1,40 @@
 "use strict";
 
-var overlays = [
-    { 'type': 0, 'coordinates': [
-            {'lat': -74.023247, 'lng': 40.766421},
-            {'lat': -73.693245, 'lng': 40.786421}
-        ]
-    },
-    { 'type': 1, 'coordinates': [
-            {'lat': -74.023247, 'lng': 40.605361},
-            {'lat': -73.693245, 'lng': 40.605361}
-        ]
-    }
-];
-
 // Cycles through overlayes
 function cycleOverlay(map, mapOverlays)
 {
     // Create the first overlay and add to map
     var overlayCount = 1;
-    var overlay = '';
+    var overlays = [];
 
     // Changes overlay every 3 seconds
     setInterval(function() {
         map.removeOverlay(overlay);
 
-        var points = [];
+        for (overlay in overlays)
+        {
+            map.removeOverlay(overlays[overlay]);
+            overlays.splice(overlay,1);
+        }
 
         if (overlayCount > mapOverlays.length)
         {
             overlayCount = 1;
         }
 
-        for (var point in mapOverlays[overlayCount - 1].coordinates)
+        for (var overlay in mapOverlays[overlayCount - 1])
         {
-            points.push(getMapPoints(mapOverlays[overlayCount - 1].coordinates[point]));
+
+            var points = [
+                getMapPoints(mapOverlays[overlayCount - 1][overlay].coordinates[0]),
+                getMapPoints(mapOverlays[overlayCount - 1][overlay].coordinates[1])
+            ];
+
+            overlay = createOverlay(mapOverlays[overlayCount - 1][overlay].type, points);
+
+            overlays.push(overlay);
+            map.addOverlay(overlay);
         }
-
-        overlay = createOverlay(points);
-
-        map.addOverlay(overlay);
 
         overlayCount += 1;
     }, 5000);
@@ -69,7 +65,7 @@ function createMap(locationPoint)
 // coordinates array<BMap.Point> An array of length 2 containing the south-west and North-East points
 // of the overlay
 // Returns a BMap.GroundOverlay object
-function createOverlay(coordinates)
+function createOverlay(type, coordinates)
 {
     // Options for the overlay
     // TODO: Set colour for overlay
@@ -81,7 +77,14 @@ function createOverlay(coordinates)
 
     var overlay = new BMap.GroundOverlay(new BMap.Bounds(coordinates[0], coordinates[1]), overlayOptions);
 
-    overlay.setImageURL('image.png');
+    if (type == 0)
+    {
+        overlay.setImageURL('images/black.png');
+    }
+    else
+    {
+        overlay.setImageURL('images/red.png');
+    }
 
     return overlay;
 }
