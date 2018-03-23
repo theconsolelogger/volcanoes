@@ -1,14 +1,46 @@
 "use strict";
 
+function getData(data) {
+    overlays = data;
+}
+/*var overlays = [
+    {
+        'type': 0,
+        'coordinates': [
+            {
+                'lat': -74.023247,
+                'lng': 40.766421
+            },
+            {
+                'lat': -73.693245,
+                'lng': 40.786421
+            }
+        ]
+    },
+    {
+        'type': 1,
+        'coordinates': [
+            {
+                'lat': -74.023247,
+                'lng': 40.605361
+            },
+            {
+                'lat': -73.693245,
+                'lng': 40.605361
+            }
+        ]
+    }
+];*/
+
+>>>>>>> Stashed changes
 // Cycles through overlayes
-function cycleOverlay(map, mapOverlays)
-{
+function cycleOverlay(map, mapOverlays) {
     // Create the first overlay and add to map
     var overlayCount = 1;
     var overlays = [];
 
     // Changes overlay every 3 seconds
-    setInterval(function() {
+    setInterval(function () {
         map.removeOverlay(overlay);
 
         for (overlay in overlays)
@@ -17,8 +49,7 @@ function cycleOverlay(map, mapOverlays)
             overlays.splice(overlay,1);
         }
 
-        if (overlayCount > mapOverlays.length)
-        {
+        if (overlayCount > mapOverlays.length) {
             overlayCount = 1;
         }
 
@@ -43,16 +74,14 @@ function cycleOverlay(map, mapOverlays)
 // Converts coordinates into BMap.Point
 //coordinates array<Float> Array containing latitude and longitude
 // Returns BMap.Point
-function getMapPoints(coordinates)
-{
+function getMapPoints(coordinates) {
     return new BMap.Point(coordinates.lat, coordinates.lng);
 }
 
 // Creates a map
 // locationPoint BMap.Point(lat,lng) The centre point for the map
 // Returns a BMap.Map object
-function createMap(locationPoint)
-{
+function createMap(locationPoint) {
     var map = new BMap.Map('allmap');
 
     map.centerAndZoom(locationPoint, 12);
@@ -70,9 +99,9 @@ function createOverlay(type, coordinates)
     // Options for the overlay
     // TODO: Set colour for overlay
     var overlayOptions = {
-      opacity: 1,
-      displayOnMinLevel: 10,
-      displayOnMaxLevel: 14,
+        opacity: 1,
+        displayOnMinLevel: 10,
+        displayOnMaxLevel: 14,
     }
 
     var overlay = new BMap.GroundOverlay(new BMap.Bounds(coordinates[0], coordinates[1]), overlayOptions);
@@ -89,6 +118,9 @@ function createOverlay(type, coordinates)
     return overlay;
 }
 
-var map = createMap(getMapPoints({'lat': -74.023247, 'lng': 40.766421}));
+var map = createMap(getMapPoints({
+    'lat': -74.023247,
+    'lng': 40.766421
+}));
 
 cycleOverlay(map, overlays);
