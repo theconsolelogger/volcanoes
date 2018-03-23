@@ -23,8 +23,13 @@ function cycleOverlay(map, mapOverlays)
     // Changes overlay every 3 seconds
     setInterval(function() {
         map.removeOverlay(overlay);
-
+        
         var points = [];
+
+        if (overlayCount > mapOverlays.length)
+        {
+            overlayCount = 1;
+        }
 
         for (var point in mapOverlays[overlayCount - 1].coordinates)
         {
