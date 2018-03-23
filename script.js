@@ -52,7 +52,7 @@ function getMapPoints(coordinates)
 // Returns a BMap.Map object
 function createMap(locationPoint)
 {
-    var map = new BMap.Map("allmap");
+    var map = new BMap.Map('allmap');
 
     map.centerAndZoom(locationPoint, 12);
     map.enableScrollWheelZoom();
@@ -79,6 +79,6 @@ function createOverlay(coordinates)
     return overlay;
 }
 
-var map = createMap();
+var map = createMap(getMapPoints(116.404449, 39.914889));
 
 cycleOverlay(map, overlays);
