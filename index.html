@@ -7,45 +7,14 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
-    <script type="text/javascript" src="http://localhost/scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
     <title>Volcanoes</title>
 </head>
 
 <body>
+    <a href="#" id='time'></a>
     <div id="allmap"></div>
-
-    <script>
-        var overlays = [
-            [
-                []
-            ]
-        ];
-        $.get('http://localhost/NYC.php', function(data) {
-            //console.log(data[0]);
-            for (var i = 0; i < data.length; i++) {
-                //console.log(data);
-                for (var j = 0, k = 0; j < 50; j = j + 5, k++) {
-                    var overlay = {
-                        'type': data[i][j],
-                        'coordinates': [{
-                                'lat': data[i][j + 1],
-                                'lng': data[i][j + 2]
-                            },
-                            {
-                                'lat': data[i][j + 3],
-                                'lng': data[i][j + 4]
-                            }
-                        ]
-                    }
-                    //console.log(overlay);
-                    overlays[i][k] = overlay;
-                }
-                console.log(overlays);
-            }
-        });
-        //console.log(overlays);
-    </script>
-    <script type="text/javascript" src="script.js">
+    <script type="text/javascript" src="scripts/script.js">
     </script>
 </body>
 </html>
