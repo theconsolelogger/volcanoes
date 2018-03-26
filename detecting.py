@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 
-filedir='H:/taxi data/'
+filedir='H:/taxi data/'		#dir of the datasets
 date='20130101'
 NW=[-74.259090,40.917577]	#NW Point
 SE=[-73.700272,40.477399]	#SE Point
@@ -43,7 +43,7 @@ def countoutflow(data):
 					break
 			of[index_lon][index_lat]=of[index_lon][index_lat]-1
 	print('outlier_PU',outlier_points)
-	return of
+	return of		#negative values
 
 def countinflow(data):
 	outlier_points=0
@@ -120,7 +120,9 @@ def volcanoes(filedir,date):
                     temp.extend([0,lons[index_row-1],lats[index_col-1],lons[index_row],lats[index_col]])
         grids.append(temp)
         time=str(int(time)+10000)
-    f=open(date+'.json','w')
+	
+	
+    f=open(date+'.json','w')	#saving json files
     flag1=0
     f.write('[')
     for i in grids:
